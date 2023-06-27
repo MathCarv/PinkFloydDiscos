@@ -8,6 +8,10 @@ Esse projeto tem como tema a banda Pink Floyd, onde é possível ver diversas cu
 
 ## Como utilizar?
 
+### Baixe o Flutter
+```
+https://docs.flutter.dev/get-started/install/windows
+```
 ### Clone o Repositório
 ```
 git clone https://github.com/MathCarv/PinkFloydDiscos
