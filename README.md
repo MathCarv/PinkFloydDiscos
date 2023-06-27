@@ -4,7 +4,8 @@
 
 Esse projeto tem como tema a banda Pink Floyd, onde é possível ver diversas curiosidades ao longo do tempo sobre a banda e os discos. 
 
-![pink-floyd-wish-you-were-here-wallpaper-preview](https://github.com/MathCarv/PinkFloydDiscos/assets/96321313/7c36d7b4-9e21-417d-a526-e858c703a7d2)
+![wallpaperflare com_wallpaper](https://github.com/MathCarv/PinkFloydDiscos/assets/96321313/cb0b9182-7d92-4749-8e7a-2ce34968de7c)
+
 
 ## Como utilizar?
 
