@@ -1,3 +1,5 @@
+[![CI](https://github.com/MathCarv/PinkFloydDiscos/actions/workflows/main.yml/badge.svg)](https://github.com/MathCarv/PinkFloydDiscos/actions/workflows/main.yml)
+
 ## Introdução
 
 Esse projeto tem como tema a banda Pink Floyd, onde é possível ver diversas curiosidades ao longo do tempo sobre a banda e os discos. 
