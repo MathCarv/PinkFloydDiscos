@@ -7,6 +7,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -76,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen>
             },
             child: Container(
               padding: const EdgeInsets.all(8),
-              child: Icon(
+              child: const Icon(
                 Icons.search,
                 color: Colors.white,
               ),
@@ -104,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen>
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                         image: AssetImage('assets/images/entrada.jpg'),
                         fit: BoxFit.cover,
@@ -128,17 +129,17 @@ class _HomeScreenState extends State<HomeScreen>
                         },
                         style: const TextStyle(
                             color: Color.fromARGB(255, 3, 3, 3)),
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Buscar álbum',
-                          hintStyle: const TextStyle(
+                          hintStyle: TextStyle(
                               color: Color.fromARGB(255, 255, 255, 255)),
                           filled: true,
                           fillColor: Color.fromARGB(255, 247, 2, 2),
-                          border: const OutlineInputBorder(
+                          border: OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(8)),
                             borderSide: BorderSide.none,
                           ),
-                          contentPadding: const EdgeInsets.symmetric(
+                          contentPadding: EdgeInsets.symmetric(
                             vertical: 8,
                             horizontal: 16,
                           ),

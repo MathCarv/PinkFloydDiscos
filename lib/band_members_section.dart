@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
 class BandMembersSection extends StatelessWidget {
-  const BandMembersSection({super.key});
+  // ignore: use_key_in_widget_constructors
+  const BandMembersSection({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.black,
       padding: const EdgeInsets.symmetric(vertical: 12),
-      child: Column(
+      child: const Column(
         children: [
-          const Text(
+          Text(
             'Membros da Banda',
             style: TextStyle(
               fontSize: 20,
@@ -18,50 +19,53 @@ class BandMembersSection extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
-              BandMemberCircle(
-                image: 'assets/images/david_gilmour.jpg',
-                name: 'David Gilmour',
-              ),
-              SizedBox(width: 8),
-              BandMemberCircle(
-                image: 'assets/images/syd_barrett.jpg',
-                name: 'Syd Barrett',
-              ),
-              SizedBox(width: 8),
-              BandMemberCircle(
-                image: 'assets/images/nick_mason.jpg',
-                name: 'Nick Mason',
-              ),
-              SizedBox(width: 8),
-              BandMemberCircle(
-                image: 'assets/images/roger_waters.jpg',
-                name: 'Roger Waters',
-              ),
-              SizedBox(width: 8),
-              BandMemberCircle(
-                image: 'assets/images/richard_wright.jpg',
-                name: 'Richard Wright',
-              ),
-              SizedBox(width: 8),
-              BandMemberCircle(
-                image: 'assets/images/Matheus.jpg',
-                name: 'Matheus Carvalho',
-              ),
-              SizedBox(width: 8),
-              BandMemberCircle(
-                image: 'assets/images/Igor.jpg',
-                name: 'Igor Villamarim',
-              ),
-              SizedBox(width: 8),
-              BandMemberCircle(
-                image: 'assets/images/Thalita.jpg',
-                name: 'Thalita Fortes',
-              ),
-            ],
+          SizedBox(height: 8),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                BandMemberCircle(
+                  image: 'assets/images/david_gilmour.jpg',
+                  name: 'David Gilmour',
+                ),
+                SizedBox(width: 8),
+                BandMemberCircle(
+                  image: 'assets/images/syd_barrett.jpg',
+                  name: 'Syd Barrett',
+                ),
+                SizedBox(width: 8),
+                BandMemberCircle(
+                  image: 'assets/images/nick_mason.jpg',
+                  name: 'Nick Mason',
+                ),
+                SizedBox(width: 8),
+                BandMemberCircle(
+                  image: 'assets/images/roger_waters.jpg',
+                  name: 'Roger Waters',
+                ),
+                SizedBox(width: 8),
+                BandMemberCircle(
+                  image: 'assets/images/richard_wright.jpg',
+                  name: 'Richard Wright',
+                ),
+                SizedBox(width: 8),
+                BandMemberCircle(
+                  image: 'assets/images/Matheus.jpg',
+                  name: 'Matheus Carvalho',
+                ),
+                SizedBox(width: 8),
+                BandMemberCircle(
+                  image: 'assets/images/Igor.jpg',
+                  name: 'Igor Villamarim',
+                ),
+                SizedBox(width: 8),
+                BandMemberCircle(
+                  image: 'assets/images/Thalita.jpg',
+                  name: 'Thalita Fortes',
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -74,10 +78,10 @@ class BandMemberCircle extends StatelessWidget {
   final String name;
 
   const BandMemberCircle({
-    super.key,
+    Key? key,
     required this.image,
     required this.name,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

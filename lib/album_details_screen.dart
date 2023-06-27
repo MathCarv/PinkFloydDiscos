@@ -9,6 +9,7 @@ class AlbumDetailsScreen extends StatefulWidget {
   const AlbumDetailsScreen({Key? key, required this.album}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _AlbumDetailsScreenState createState() => _AlbumDetailsScreenState();
 }
 
@@ -40,7 +41,9 @@ class _AlbumDetailsScreenState extends State<AlbumDetailsScreen> {
 
   void launchSpotify() async {
     final url = widget.album.spotifyURL;
+    // ignore: deprecated_member_use
     if (await canLaunch(url)) {
+      // ignore: deprecated_member_use
       await launch(url);
     } else {
       throw 'Could not launch $url';
@@ -118,14 +121,14 @@ class _AlbumDetailsScreenState extends State<AlbumDetailsScreen> {
                   const SizedBox(height: 24),
                   Text(
                     'Trecho de ${widget.album.nomeMusica}: ',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 24),
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height *
                         0.8, // Aumento do tamanho da tela do vídeo
                     child: Align(
@@ -162,7 +165,7 @@ class _AlbumDetailsScreenState extends State<AlbumDetailsScreen> {
                                 controller.value.isPlaying
                                     ? Icons.pause
                                     : Icons.play_arrow,
-                                color: Color.fromARGB(255, 73, 2, 2),
+                                color: const Color.fromARGB(255, 73, 2, 2),
                                 size: 48,
                               ),
                             ),
@@ -179,7 +182,7 @@ class _AlbumDetailsScreenState extends State<AlbumDetailsScreen> {
                         onTap: launchSpotify,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 44, 43, 43),
+                            color: const Color.fromARGB(255, 44, 43, 43),
                             borderRadius: BorderRadius.circular(50),
                           ),
                           padding: const EdgeInsets.all(16),
@@ -187,7 +190,7 @@ class _AlbumDetailsScreenState extends State<AlbumDetailsScreen> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               const SizedBox(width: 8),
-                              Text(
+                              const Text(
                                 'Escute agora no Spotify ',
                                 style: TextStyle(
                                   fontSize: 20,
