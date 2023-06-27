@@ -89,28 +89,8 @@ jobs:
           name: Test results
           path: coverage/lcov.info
 
-  convert_coverage:
-    name: Convert coverage to HTML
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          channel: stable
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Convert coverage to HTML
-        run: |
-          genhtml coverage/lcov.info -o coverage/html
-
   publish_artifact:
-    name: Publish HTML artifact
+    name: Publish CSV artifact
     runs-on: ubuntu-latest
 
     steps:
@@ -125,8 +105,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Publish HTML artifact
+      - name: Publish CSV artifact
         uses: actions/upload-artifact@v2
         with:
           name: Coverage report
-          path: coverage/html
+          path: coverage/lcov.csv
