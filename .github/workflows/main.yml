@@ -67,14 +67,8 @@ jobs:
       - name: Run tests
         run: flutter test test/band_members_section_test.dart --coverage
 
-      - name: Convert coverage to CSV
-        run: |
-          DART_SDK="$RUNNER_TOOL_CACHE/flutter-sdk/bin/cache/dart-sdk"
-          COVERAGE="$RUNNER_TOOL_CACHE/flutter-sdk/.pub-cache/bin/coverage"
-          $DART_SDK/bin/dart $COVERAGE format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov.csv --packages=.packages --report-on=lib/
-
-  publish_artifact:
-    name: Publish CSV artifact
+  publish_coverage:
+    name: Publish coverage
     runs-on: ubuntu-latest
 
     steps:
@@ -89,8 +83,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Publish CSV artifact
+      - name: Publish coverage
         uses: actions/upload-artifact@v2
         with:
           name: Coverage report
-          path: coverage/lcov.csv
+          path: coverage
