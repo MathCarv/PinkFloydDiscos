@@ -9,7 +9,41 @@ on:
       - main
 
 jobs:
-  test:
+  checkout:
+    name: Checkout code
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+  setup_flutter:
+    name: Set up Flutter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+  install_dependencies:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
+  run_tests:
     name: Run tests
     runs-on: ubuntu-latest
 
@@ -28,17 +62,65 @@ jobs:
       - name: Run tests
         run: flutter test test/band_members_section_test.dart --coverage
 
+  publish_results:
+    name: Publish test results
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
       - name: Publish test results
         uses: actions/upload-artifact@v2
         with:
           name: Test results
           path: coverage/lcov.info
 
+  convert_coverage:
+    name: Convert coverage to HTML
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
+
       - name: Convert coverage to HTML
         run: |
           flutter pub global activate coverage
           dart run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=.packages --report-on=lib/
           dart run coverage:coverage_html --in=coverage/lcov_report.info --out=coverage/lcov-report
+
+  publish_artifact:
+    name: Publish HTML artifact
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          channel: stable
+
+      - name: Install dependencies
+        run: flutter pub get
 
       - name: Publish HTML artifact
         uses: actions/upload-artifact@v2
