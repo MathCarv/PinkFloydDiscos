@@ -7,7 +7,6 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _HomeScreenState createState() => _HomeScreenState();
 }
 
@@ -66,20 +65,23 @@ class _HomeScreenState extends State<HomeScreen>
         ),
         centerTitle: true,
         actions: [
-          GestureDetector(
-            onTap: () {
-              setState(() {
-                isSearchExpanded = !isSearchExpanded;
-                if (isSearchExpanded) {
-                  FocusScope.of(context).requestFocus(FocusNode());
-                }
-              });
-            },
-            child: Container(
-              padding: const EdgeInsets.all(8),
-              child: const Icon(
-                Icons.search,
-                color: Colors.white,
+          MouseRegion(
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  isSearchExpanded = !isSearchExpanded;
+                  if (isSearchExpanded) {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  }
+                });
+              },
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Icon(
+                  Icons.search,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
@@ -160,39 +162,42 @@ class _HomeScreenState extends State<HomeScreen>
                         itemCount: filteredAlbums.length,
                         itemBuilder: (context, index) {
                           final album = filteredAlbums[index];
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      AlbumDetailsScreen(album: album),
-                                ),
-                              );
-                            },
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Expanded(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8),
-                                    child: Image.asset(
-                                      album.imagem,
-                                      fit: BoxFit.cover,
+                          return MouseRegion(
+                            cursor: SystemMouseCursors.click,
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        AlbumDetailsScreen(album: album),
+                                  ),
+                                );
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Expanded(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
+                                      child: Image.asset(
+                                        album.imagem,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  album.nome,
-                                  style: const TextStyle(
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    album.nome,
+                                    style: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                    textAlign: TextAlign.center,
                                   ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
                           );
                         },
