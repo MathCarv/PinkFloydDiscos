@@ -67,40 +67,30 @@ jobs:
       - name: Run tests
         run: flutter test test/band_members_section_test.dart --coverage
 
-  publish_results:
-    name: Publish test results
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          channel: stable
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Publish test results
-        uses: actions/upload-artifact@v2
-        with:
-          name: Test results
-          path: coverage/lcov.info
-
-  convert_csv_to_html:
-    name: Convert CSV to HTML
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Convert CSV to HTML
+      - name: Convert coverage to CSV
         run: |
-          npm install -g csvtohtml-cli
-          csvtohtml coverage/lcov.csv > coverage/lcov.html
+          DART_SDK="$RUNNER_TOOL_CACHE/flutter-sdk/bin/cache/dart-sdk"
+          COVERAGE="$RUNNER_TOOL_CACHE/flutter-sdk/.pub-cache/bin/coverage"
+          $DART_SDK/bin/dart $COVERAGE format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov.csv --packages=.packages --report-on=lib/
+
+  convert_coverage:
+    name: Convert coverage to HTML
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install csv-html-table package
+        run: npm install csv-html-table
+
+      - name: Convert coverage to HTML
+        run: npx csv-html-table coverage/lcov.csv -o coverage/lcov.html
 
   publish_artifact:
     name: Publish HTML artifact
