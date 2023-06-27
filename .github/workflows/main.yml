@@ -103,7 +103,7 @@ jobs:
       - name: Convert coverage to HTML
         run: |
           flutter pub global activate coverage
-          dart run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=.packages --report-on=lib/
+          dart run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=$PWD/.packages --report-on=lib/
           dart run coverage:coverage_html --in=coverage/lcov_report.info --out=coverage/lcov-report
 
   publish_artifact:
