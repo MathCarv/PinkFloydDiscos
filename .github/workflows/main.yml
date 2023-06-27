@@ -89,8 +89,21 @@ jobs:
           name: Test results
           path: coverage/lcov.info
 
+  convert_csv_to_html:
+    name: Convert CSV to HTML
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Convert CSV to HTML
+        run: |
+          npm install -g csvtohtml-cli
+          csvtohtml coverage/lcov.csv > coverage/lcov.html
+
   publish_artifact:
-    name: Publish CSV artifact
+    name: Publish HTML artifact
     runs-on: ubuntu-latest
 
     steps:
@@ -105,8 +118,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Publish CSV artifact
+      - name: Publish HTML artifact
         uses: actions/upload-artifact@v2
         with:
           name: Coverage report
-          path: coverage/lcov.csv
+          path: coverage/lcov.html
