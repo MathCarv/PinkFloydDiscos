@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Run tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.10.5'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test test/band_members_section_test.dart --coverage
+
+      - name: Publish test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Test results
+          path: coverage/lcov-report
+
+      - name: Convert coverage to HTML
+        run: |
+          curl -sL https://github.com/chrisseto/coveralls-reporter/releases/latest/download/coveralls-reporter-linux-x64 > coveralls-reporter
+          chmod +x coveralls-reporter
+          ./coveralls-reporter coverage/lcov.info
+
+      - name: Publish HTML artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Coverage report
+          path: coverage/lcov-report
+
