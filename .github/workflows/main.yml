@@ -17,28 +17,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v1
-        with:
-          flutter-version: stable
+      - name: Set up Dart
+        uses: dart-lang/setup-dart@v1
 
       - name: Install dependencies
-        run: flutter pub get
+        run: dart pub get
 
       - name: Run tests
-        run: flutter test test/band_members_section_test.dart --coverage
+        run: dart test test/band_members_section_test.dart --coverage=coverage
 
       - name: Publish test results
         uses: actions/upload-artifact@v2
         with:
           name: Test results
-          path: coverage/lcov-report
+          path: coverage/lcov.info
 
       - name: Convert coverage to HTML
         run: |
-          flutter pub global activate coverage
-          flutter pub global run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=.packages --report-on=lib/
-          flutter pub global run coverage:coverage_html --in=coverage/lcov_report.info --out=coverage/lcov-report
+          dart run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=.packages --report-on=lib/
+          dart run coverage:coverage_html --in=coverage/lcov_report.info --out=coverage/lcov-report
 
       - name: Publish HTML artifact
         uses: actions/upload-artifact@v2
