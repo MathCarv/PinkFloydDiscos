@@ -64,8 +64,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Run tests
-        run: flutter test test/band_members_section_test.dart --coverage
+      - name: Run tests with coverage
+        run: flutter test --coverage
 
   publish_results:
     name: Publish test results
@@ -107,9 +107,8 @@ jobs:
 
       - name: Convert coverage to HTML
         run: |
-          flutter pub global activate coverage
-          dart run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=$PWD/.packages --report-on=lib/
-          dart run coverage:coverage_html --in=coverage/lcov_report.info --out=coverage/lcov-report
+          flutter pub global run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=.packages --report-on=lib/
+          flutter pub global run coverage:coverage_html --in=coverage/lcov_report.info --out=coverage/lcov-report
 
   publish_artifact:
     name: Publish HTML artifact
