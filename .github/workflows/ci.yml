@@ -19,16 +19,43 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.2.3'  # Substitua pela versão do Flutter que você está usando ou prefira
+          flutter-version: '2.2.3'  # Substitua pela versão do Flutter que você está usando ou preferir
 
       - name: Get dependencies
         run: flutter pub get
 
-      - name: Run tests
-        run: flutter test --coverage
+  bandMembersSectionTests:
+    runs-on: ubuntu-latest
 
-      - name: Archive test results
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.2.3'  # Substitua pela versão do Flutter que você está usando ou preferir
+
+      - name: Get dependencies
+        run: flutter pub get
+
+      - name: Run BandMembersSection tests
+        run: flutter test test/band_members_section_test.dart
+
+  coverageReport:
+    needs: [bandMembersSectionTests]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Merge coverage reports
+        run: |
+          lcov-result-merger './coverage/**/lcov.info' './coverage/merged/lcov.info'
+
+      - name: Upload coverage report
         uses: actions/upload-artifact@v2
         with:
-          name: Test Results
-          path: coverage/lcov-report/index.html
+          name: Coverage Report
+          path: coverage/merged
