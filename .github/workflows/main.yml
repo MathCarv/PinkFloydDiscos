@@ -26,7 +26,7 @@ jobs:
         run: flutter pub get
 
       - name: Run tests
-        run: flutter test test/band_members_section_test.dart --coverage=coverage
+        run: flutter test test/band_members_section_test.dart --coverage
 
       - name: Publish test results
         uses: actions/upload-artifact@v2
