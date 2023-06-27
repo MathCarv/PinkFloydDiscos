@@ -107,10 +107,7 @@ jobs:
 
       - name: Convert coverage to HTML
         run: |
-          DART_SDK="$RUNNER_TOOL_CACHE/flutter-sdk/bin/cache/dart-sdk"
-          COVERAGE="$RUNNER_TOOL_CACHE/flutter-sdk/.pub-cache/bin/coverage"
-          $DART_SDK/bin/dart $COVERAGE format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=.packages --report-on=lib/
-          $DART_SDK/bin/dart $COVERAGE coverage_html --in=coverage/lcov_report.info --out=coverage/lcov-report
+          genhtml coverage/lcov.info -o coverage/html
 
   publish_artifact:
     name: Publish HTML artifact
@@ -132,4 +129,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Coverage report
-          path: coverage/lcov-report
+          path: coverage/html
