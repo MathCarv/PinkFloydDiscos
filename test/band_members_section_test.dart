@@ -176,4 +176,39 @@ void main() {
       expect(titleStyle.fontWeight, isNot(equals(FontWeight.normal)));
     },
   );
+
+  testWidgets(
+    'BandMembersSection - Verificar se o número de membros da banda é correto',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(const MaterialApp(home: BandMembersSection()));
+
+      final memberCount = find.byType(BandMemberCircle).evaluate().length;
+
+      expect(memberCount, equals(8));
+    },
+  );
+  testWidgets(
+    'BandMembersSection - Verificar se os nomes dos membros da banda estão em negrito',
+    (WidgetTester tester) async {
+      await tester.pumpWidget(const MaterialApp(home: BandMembersSection()));
+
+      final memberNames = [
+        'David Gilmour',
+        'Syd Barrett',
+        'Nick Mason',
+        'Roger Waters',
+        'Richard Wright',
+        'Matheus Carvalho',
+        'Igor Villamarim',
+        'Thalita Fortes',
+      ];
+
+      for (final name in memberNames) {
+        final memberName = find.text(name);
+        expect(memberName, findsOneWidget);
+        final textStyle = tester.widget<Text>(memberName).style;
+        expect(textStyle!.fontWeight, equals(FontWeight.bold));
+      }
+    },
+  );
 }
