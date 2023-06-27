@@ -1,11 +1,10 @@
 [![CI](https://github.com/MathCarv/PinkFloydDiscos/actions/workflows/main.yml/badge.svg)](https://github.com/MathCarv/PinkFloydDiscos/actions/workflows/main.yml)
 
+![wallpaperflare com_wallpaper](https://github.com/MathCarv/PinkFloydDiscos/assets/96321313/cb0b9182-7d92-4749-8e7a-2ce34968de7c)
+
 ## Introdução
 
 Esse projeto tem como tema a banda Pink Floyd, onde é possível ver diversas curiosidades ao longo do tempo sobre a banda e os discos. 
-
-![wallpaperflare com_wallpaper](https://github.com/MathCarv/PinkFloydDiscos/assets/96321313/cb0b9182-7d92-4749-8e7a-2ce34968de7c)
-
 
 ## Como utilizar?
 
