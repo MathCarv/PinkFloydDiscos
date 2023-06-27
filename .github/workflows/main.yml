@@ -30,7 +30,7 @@ jobs:
   install_dependencies:
     name: Install dependencies
     runs-on: ubuntu-latest
-
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -42,6 +42,11 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
+        
+      - name: Check current directory
+        run: |
+          echo "Current directory: $PWD"
+          ls -la
 
   run_tests:
     name: Run tests
