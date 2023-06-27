@@ -20,7 +20,7 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '2.10.5'
+          flutter-version: '2.19.5'
 
       - name: Install dependencies
         run: flutter pub get
@@ -36,13 +36,12 @@ jobs:
 
       - name: Convert coverage to HTML
         run: |
-          curl -sL https://github.com/chrisseto/coveralls-reporter/releases/latest/download/coveralls-reporter-linux-x64 > coveralls-reporter
-          chmod +x coveralls-reporter
-          ./coveralls-reporter coverage/lcov.info
+          flutter pub global activate coverage
+          flutter pub global run coverage:format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov_report.info --packages=.packages --report-on=lib/
+          flutter pub global run coverage:coverage_html --in=coverage/lcov_report.info --out=coverage/lcov-report
 
       - name: Publish HTML artifact
         uses: actions/upload-artifact@v2
         with:
           name: Coverage report
           path: coverage/lcov-report
-
