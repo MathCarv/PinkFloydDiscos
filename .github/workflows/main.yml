@@ -73,27 +73,8 @@ jobs:
           COVERAGE="$RUNNER_TOOL_CACHE/flutter-sdk/.pub-cache/bin/coverage"
           $DART_SDK/bin/dart $COVERAGE format_coverage --lcov --in=coverage/lcov.info --out=coverage/lcov.csv --packages=.packages --report-on=lib/
 
-  convert_coverage:
-    name: Convert coverage to HTML
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '14'
-
-      - name: Install csv-html-table package
-        run: npm install csv-html-table
-
-      - name: Convert coverage to HTML
-        run: npx csv-html-table coverage/lcov.csv -o coverage/lcov.html
-
   publish_artifact:
-    name: Publish HTML artifact
+    name: Publish CSV artifact
     runs-on: ubuntu-latest
 
     steps:
@@ -108,8 +89,8 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Publish HTML artifact
+      - name: Publish CSV artifact
         uses: actions/upload-artifact@v2
         with:
           name: Coverage report
-          path: coverage/lcov.html
+          path: coverage/lcov.csv
